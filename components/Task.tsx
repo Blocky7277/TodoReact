@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import masterStyles from "@/styles/defaultStyles";
 import Button from "./Button";
@@ -19,6 +19,7 @@ const Task: React.FC<TaskProps> = ({
   index,
   onComplete,
 }) => {
+  if (task == "") task = "Empty Task";
   if (date == "") date = "Today";
   if (location == "") location = "N/A";
   return (
@@ -46,10 +47,10 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     alignItems: "center",
-    width: "80%",
+    // https://chatgpt.com/share/6797ba76-e084-8012-ade9-66a871e940a7 Platform specific styles
+    width: Platform.OS === "web" ? 240 : '70%',  // Adjust width for web
     borderColor: colors.darkAccent,
     borderWidth: 2,
     marginVertical: 7,
   },
-  taskText: {},
 });

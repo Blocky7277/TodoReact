@@ -13,7 +13,9 @@ type Task = {
 };
 
 export default function Index() {
+  // Use arrays with useState https://react.dev/learn/updating-arrays-in-state
   const [taskList, setTaskList] = useState<Task[]>([]);
+  // Use objects with useState https://blog.logrocket.com/using-react-usestate-object/
   const [newTask, setNewTask] = useState<Task>({
     name: "",
     date: "",
@@ -41,9 +43,8 @@ export default function Index() {
 
   return (
     <View style={masterStyles.root}>
-      <View className="titleContainer" style={[masterStyles.root, { flex: 1 }]}>
+      <View style={[masterStyles.root, { flex: 1 }]}>
         <Text
-          className="title"
           style={[
             masterStyles.text,
             { verticalAlign: "middle", fontSize: 30, padding: 10 },
@@ -52,25 +53,7 @@ export default function Index() {
           Todo List:
         </Text>
       </View>
-      {/* <View
-        className="taskList"
-        style={[
-          masterStyles.root,
-          { flex: 5, width: "100%", justifyContent: "flex-start", padding: 10 },
-        ]}
-      >
-        {taskList.map((task, i) => (
-          <Task
-            key={i}
-            task={task.name}
-            date={task.date}
-            location={task.location}
-            onComplete={completeTask}
-          ></Task>
-        ))}
-      </View> */}
       <View
-        className="taskList"
         style={[
           masterStyles.root,
           {
@@ -80,10 +63,11 @@ export default function Index() {
           },
         ]}
       >
+        {/* How to use a flatlist https://reactnative.dev/docs/flatlist */}
         <FlatList
+          style={{width:"100%", flex:1}}
           contentContainerStyle={[
-            // masterStyles.root,
-            { justifyContent: "flex-start", alignItems: "center" },
+            { justifyContent: "flex-start", alignItems: "center", width: "100%", flex:1, height: "auto"},
           ]}
           data={taskList}
           renderItem={(data) => (
@@ -98,7 +82,6 @@ export default function Index() {
         ></FlatList>
       </View>
       <View
-        className="createTask"
         style={[masterStyles.root, { flex: 4, width: "100%" }]}
       >
         <TextField
